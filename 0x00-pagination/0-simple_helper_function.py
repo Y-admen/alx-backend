@@ -2,15 +2,11 @@
 from typing import Tuple
 
 
-def index_range(page: int, page_size: int) -> Tuple:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """_summary_
 
-    Args:
-        page (int): _description_
-        page_size (int): _description_
-
     Returns:
-        Tuple: _description_
+        Tuple: start_index, end_index
     """
     start_index = (page - 1) * page_size
     end_index = page * page_size
