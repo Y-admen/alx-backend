@@ -2,7 +2,7 @@
 from typing import Tuple
 
 
-def index_range(page: int = 1, page_size: int = 0) -> Tuple[int, int]:
+def index_range(page: int = 1, page_size: int = 10) -> Tuple[int, int]:
     """_summary_
 
     Returns:
