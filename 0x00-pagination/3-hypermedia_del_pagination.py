@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from typing import Dict, List
 import csv
+"Deletion-resilient hypermedia pagination"
 
 
 class Server:

@@ -2,6 +2,7 @@
 from typing import Tuple, List
 import csv
 import math
+"Simple pagination"
 
 
 class Server:
@@ -53,7 +54,30 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
     Returns:
         Tuple[int, int]: Start index and end index.
     """
-    total_rows = len(Server.dataset())
-    start_idx = (page - 1) * page_size
-    end_idx = min(start_idx + page_size, total_rows)
-    return start_idx, end_idx
+    if page < 1:
+        page = 1
+    start_index = (page - 1) * page_size
+    end_index = page * page_size
+    return start_index, end_index
+
+server = Server()
+
+try:
+    should_err = server.get_page(-10, 2)
+except AssertionError:
+    print("AssertionError raised with negative values")
+
+try:
+    should_err = server.get_page(0, 0)
+except AssertionError:
+    print("AssertionError raised with 0")
+
+try:
+    should_err = server.get_page(2, 'Bob')
+except AssertionError:
+    print("AssertionError raised when page and/or page_size are not ints")
+
+
+print(server.get_page(1, 3))
+print(server.get_page(3, 2))
+print(server.get_page(3000, 100))

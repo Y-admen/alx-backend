@@ -2,6 +2,7 @@
 import csv
 import math
 from typing import List, Tuple, Optional
+"Hypermedia pagination"
 
 
 class Server:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from typing import Tuple
+"Simple helper function"
 
 
 def index_range(page: int = 1, page_size: int = 10) -> Tuple[int, int]:
