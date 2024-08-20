@@ -11,14 +11,14 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         "add item"
-        if not key or not item:
-            return
-        else:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                first_key = self.key_list.pop()
+        if key is not None and item is not None:
+            if key not in self.cache_data:
+                self.order.append(key)
+            self.cache_data[key] = item
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+                first_key = self.order.pop()
                 del self.cache_data[first_key]
-        self.cache_data[key] = item
-        self.key_list.append(key)
+                print("DISCARD: {}".format(first_key))
 
     def get(self, key):
         "get vlaue"
