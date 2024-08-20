@@ -5,7 +5,6 @@ import math
 from typing import List, Tuple, Optional
 
 
-
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -86,7 +85,8 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
     Returns:
         int: The total number of rows in the dataset.
     """
-    total_rows = len(Server.dataset())
-    start_idx = (page - 1) * page_size
-    end_idx = min(start_idx + page_size, total_rows)
-    return start_idx, end_idx
+    if page < 1:
+        page = 1
+    start_index = (page - 1) * page_size
+    end_index = page * page_size
+    return start_index, end_index
