@@ -6,13 +6,10 @@ BaseCaching = __import__('base_caching').BaseCaching
 class BasicCache(BaseCaching):
     "BasicCache"
     def put(self, key, item):
-        "add item"
-        if not key or not item:
-            return
-        self.cache_data[key] = item
+        """ Add an item in the cache """
+        if key is not None and item is not None:
+            self.cache_data[key] = item
 
     def get(self, key):
-        "get vlaue"
-        if not key or key not in self.cache_data:
-            return
-        return self.cache_data[key]
+        """ Get an item by key """
+        return self.cache_data.get(key, None)
