@@ -7,7 +7,6 @@ class LIFOCache(BaseCaching):
     "LIFOCache"
     def __init__(self):
         super().__init__()
-        self.cache_data = {}
         self.key_list = []
 
     def put(self, key, item):

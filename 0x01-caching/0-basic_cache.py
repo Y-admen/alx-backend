@@ -5,10 +5,6 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
     "BasicCache"
-    def __init__(self):
-        super().__init__()
-        self.cache_data = {}
-
     def put(self, key, item):
         "add item"
         if not key or not item:
