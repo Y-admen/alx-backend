@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-" FIFO caching"
+" LIFO Cache"
 from typing import Any
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
-    "FIFO Cache"
+class LIFOCache(BaseCaching):
+    "LIFO Cache"
     def __init__(self) -> None:
         """ Initialize of FIFO and call the base"""
         super().__init__()
