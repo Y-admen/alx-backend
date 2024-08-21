@@ -1,18 +1,27 @@
 #!/usr/bin/python3
-" LMRU Cache"
+" MRU Cache"
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
     "MRUCache"
     def __init__(self):
-        """ Initialize of FIFO and call the base"""
+        """ Initialize of MRU and call the base"""
         super().__init__()
         self.cache_data = {}
         self.key_list = []
 
     def put(self, key, item):
-        "add item"
+        """
+        Add an item to the cache.
+
+        Parameters:
+        key (str): The unique identifier for the item.
+        item (Any): The item to be stored in the cache.
+
+        Returns:
+        None
+        """
         if not key or not item:
             return
         if key in self.cache_data:
@@ -27,7 +36,15 @@ class MRUCache(BaseCaching):
         self.key_list.append(key)
 
     def get(self, key):
-        "get vlaue"
+        """
+        Get an item by key.
+
+        Parameters:
+        key (str): The unique identifier for the item.
+
+        Returns:
+        Any: The item associated with the key, or None if the key is not found.
+        """
         if not key or key not in self.cache_data:
             return
         value = self.cache_data[key]
