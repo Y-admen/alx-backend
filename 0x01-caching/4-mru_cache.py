@@ -6,6 +6,7 @@ from base_caching import BaseCaching
 class MRUCache(BaseCaching):
     "MRUCache"
     def __init__(self):
+        """ Initialize of FIFO and call the base"""
         super().__init__()
         self.cache_data = {}
         self.key_list = []

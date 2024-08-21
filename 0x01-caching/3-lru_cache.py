@@ -6,6 +6,7 @@ from base_caching import BaseCaching
 class LRUCache(BaseCaching):
     "LRUCache"
     def __init__(self):
+        """ Initialize of FIFO and call the base"""
         super().__init__()
         self.key_list = []
 

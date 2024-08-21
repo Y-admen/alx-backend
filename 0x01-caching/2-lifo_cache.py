@@ -6,6 +6,7 @@ from base_caching import BaseCaching
 class LIFOCache(BaseCaching):
     "LIFOCache"
     def __init__(self):
+        """ Initialize of FIFO and call the base"""
         super().__init__()
         self.key_list = []
 
