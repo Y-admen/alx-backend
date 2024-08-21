@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 " FIFO caching"
 from typing import Optional, Any
-BaseCaching = __import__('base_caching').BaseCaching
+from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):

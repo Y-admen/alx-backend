@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 " LMRU Cache"
-BaseCaching = __import__('base_caching').BaseCaching
+from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
