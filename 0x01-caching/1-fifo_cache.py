@@ -1,29 +1,46 @@
 #!/usr/bin/python3
 " FIFO caching"
+from typing import Optional, Any
 BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    def __init__(self):
-        super().__init__()  # Call the parent class's constructor
+    "FIFOCache"
+    def __init__(self) -> None:
+        super().__init__()
+        self.key_list: list[str] = []
 
-    def put(self, key, item):
-        if key is None or item is None:
-            return
+    def put(self, key: Optional[str], item: Optional[Any]) -> None:
+        """
+        Add an item in the cache.
 
-        # Add the item to the cache
-        self.cache_data[key] = item
+        Parameters:
+        key (Optional[str]): The unique identifier for the item.
+        item (Optional[Any]): The item to be stored in the cache.
 
-        # Check if we need to discard the first item
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            # Get the first inserted key
-            first_key = next(iter(self.cache_data))
-            # FIFO: first item in the dictionary
-            # Remove the first inserted item
-            del self.cache_data[first_key]
-            print(f"DISCARD: {first_key}")
+        Returns:
+        None
+        """
+        if key is not None and item is not None:
+            if key in self.cache_data:
+                self.key_list.remove(key)
+            elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                first_key = self.key_list.pop(0)
+                del self.cache_data[first_key]
+                print(f"DISCARD: {first_key}")
 
-    def get(self, key):
-        if key is None or key not in self.cache_data:
-            return None
-        return self.cache_data[key]
+            self.cache_data[key] = item
+            self.key_list.append(key)
+
+    def get(self, key: Optional[str]) -> Optional[Any]:
+        """
+        Get an item by key.
+
+        Parameters:
+        key (Optional[str]): The unique identifier for the item.
+
+        Returns:
+        Optional[Any]: The item associated with the key,
+        or None if the key is not found.
+        """
+        return self.cache_data.get(key, None)
