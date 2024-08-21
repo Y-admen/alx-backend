@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 " LRU Cache"
+from typing import Any
 from base_caching import BaseCaching
 
 
@@ -44,11 +45,10 @@ class LRUCache(BaseCaching):
         Returns:
         Any: The item associated with the key, or None if the key is not found.
         """
-        if not key or key not in self.cache_data:
-            return
         value = self.cache_data[key]
-        del self.cache_data[key]
-        self.key_list.remove(key)
-        self.cache_data[key] = value
-        self.key_list.append(key)
+        if value:
+            del self.cache_data[key]
+            self.key_list.remove(key)
+            self.cache_data[key] = value
+            self.key_list.append(key)
         return self.cache_data.get(key, None)
