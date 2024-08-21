@@ -1,28 +1,47 @@
 #!/usr/bin/python3
-" LIFO Cache"
+" FIFO caching"
+from typing import Any
 from base_caching import BaseCaching
 
 
-class LIFOCache(BaseCaching):
-    "LIFOCache"
-    def __init__(self):
+class FIFOCache(BaseCaching):
+    "FIFO Cache"
+    def __init__(self) -> None:
         """ Initialize of FIFO and call the base"""
         super().__init__()
         self.key_list = []
 
-    def put(self, key, item):
-        "add item"
-        if key is not None and item is not None:
-            if key not in self.cache_data:
-                self.order.append(key)
-            self.cache_data[key] = item
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                first_key = self.order.pop()
-                del self.cache_data[first_key]
-                print("DISCARD: {}".format(first_key))
+    def put(self, key, item) -> None:
+        """
+        Add an item in the cache.
 
-    def get(self, key):
-        "get vlaue"
-        if not key or key not in self.cache_data:
-            return
-        return self.cache_data[key]
+        Parameters:
+        key (Optional[str]): The unique identifier for the item.
+        item (Optional[Any]): The item to be stored in the cache.
+
+        Returns:
+        None
+        """
+        if key is not None and item is not None:
+            if key in self.cache_data:
+                self.key_list.remove(key)
+            elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                first_key = self.key_list.pop()
+                del self.cache_data[first_key]
+                print(f"DISCARD: {first_key}")
+
+            self.cache_data[key] = item
+            self.key_list.append(key)
+
+    def get(self, key) -> Any:
+        """
+        Get an item by key.
+
+        Parameters:
+        key (Optional[str]): The unique identifier for the item.
+
+        Returns:
+        Optional[Any]: The item associated with the key,
+        or None if the key is not found.
+        """
+        return self.cache_data.get(key, None)
