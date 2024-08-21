@@ -6,12 +6,12 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class FIFOCache(BaseCaching):
     "FIFOCache"
-    def __init__(self)-> None:
+    def __init__(self) -> None:
         super().__init__()
         self.key_list: list[str] = []
 
 # Optional[X] is a shorthand for Union[X, None]/in str can not be None
-    def put(self, key: Optional[str], item: Optional[Any])-> None:
+    def put(self, key: Optional[str], item: Optional[Any]) -> None:
         """ Add an item in the cache
         """
         if key is None or item is None:
@@ -27,6 +27,6 @@ class FIFOCache(BaseCaching):
         self.cache_data[key] = item
         self.key_list.append(key)
 
-    def get(self, key: Optional[str])-> Optional[Any]:
+    def get(self, key: Optional[str]) -> Optional[Any]:
         """ Get an item by key """
         return self.cache_data.get(key, None)
