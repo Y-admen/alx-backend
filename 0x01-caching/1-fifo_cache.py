@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 " FIFO caching"
-from typing import Optional, Any
+from typing import Any
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    "FIFOCache"
+    "FIFO Cache"
     def __init__(self) -> None:
+        """ Initialize of FIFO and call the base"""
         super().__init__()
-        self.key_list: list[str] = []
+        self.key_list = []
 
-    def put(self, key: Optional[str], item: Optional[Any]) -> None:
+    def put(self, key, item) -> None:
         """
         Add an item in the cache.
 
@@ -32,7 +33,7 @@ class FIFOCache(BaseCaching):
             self.cache_data[key] = item
             self.key_list.append(key)
 
-    def get(self, key: Optional[str]) -> Optional[Any]:
+    def get(self, key) -> Any:
         """
         Get an item by key.
 
