@@ -1,29 +1,22 @@
-#!/usr/bin/python3
-" LRU Cache"
+"""LRU caching"""
 from typing import Any
+
 from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
-    "LRUCache"
+    """ LRU caching system"""
+
     def __init__(self) -> None:
-        """ Initialize of FIFO and call the base"""
+        """ Initialize of LRU and call the base"""
         super().__init__()
         self.lru_keys = []
 
     def put(self, key, item) -> None:
-        """
-        Add an item to the cache.
-
-        Parameters:
-        key (str): The unique identifier for the item.
-        item (Any): The item to be stored in the cache.
-
-        Returns:
-        None
-        """
+        """ Store the data in LRU policy"""
         if not key or not item:
             return
+
         if key in self.lru_keys:
             self.cache_data[key] = item
 
@@ -40,15 +33,7 @@ class LRUCache(BaseCaching):
         self.cache_data[key] = item
 
     def get(self, key) -> Any:
-        """
-        Get an item by key.
-
-        Parameters:
-        key (str): The unique identifier for the item.
-
-        Returns:
-        Any: The item associated with the key, or None if the key is not found.
-        """
+        """ Get data from LRU cache system"""
         value = self.cache_data.get(key)
         if value:
             self.lru_keys.remove(key)
