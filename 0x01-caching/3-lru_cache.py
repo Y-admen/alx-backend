@@ -9,7 +9,7 @@ class LRUCache(BaseCaching):
     def __init__(self) -> None:
         """ Initialize of FIFO and call the base"""
         super().__init__()
-        self.key_list = []
+        self.lru_keys = []
 
     def put(self, key, item) -> None:
         """
