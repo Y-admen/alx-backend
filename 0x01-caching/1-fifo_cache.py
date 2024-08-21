@@ -1,32 +1,29 @@
 #!/usr/bin/python3
 " FIFO caching"
-from typing import Optional, Any
 BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    "FIFOCache"
-    def __init__(self) -> None:
-        super().__init__()
-        self.key_list: list[str] = []
+    def __init__(self):
+        super().__init__()  # Call the parent class's constructor
 
-# Optional[X] is a shorthand for Union[X, None]/in str can not be None
-    def put(self, key: Optional[str], item: Optional[Any]) -> None:
-        """ Add an item in the cache
-        """
+    def put(self, key, item):
         if key is None or item is None:
             return
 
-        if key in self.cache_data:
-            self.key_list.remove(key)
-        elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            first_key = self.key_list.pop(0)
+        # Add the item to the cache
+        self.cache_data[key] = item
+
+        # Check if we need to discard the first item
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            # Get the first inserted key
+            first_key = next(iter(self.cache_data))
+            # FIFO: first item in the dictionary
+            # Remove the first inserted item
             del self.cache_data[first_key]
             print(f"DISCARD: {first_key}")
 
-        self.cache_data[key] = item
-        self.key_list.append(key)
-
-    def get(self, key: Optional[str]) -> Optional[Any]:
-        """ Get an item by key """
-        return self.cache_data.get(key, None)
+    def get(self, key):
+        if key is None or key not in self.cache_data:
+            return None
+        return self.cache_data[key]
