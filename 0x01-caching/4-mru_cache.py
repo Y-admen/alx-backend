@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 " MRU Cache"
+from typing import Any
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
     "MRUCache"
-    def __init__(self):
+    def __init__(self) -> None:
         """ Initialize of MRU and call the base"""
         super().__init__()
         self.cache_data = {}
         self.key_list = []
 
-    def put(self, key, item):
+    def put(self, key, item) -> None:
         """
         Add an item to the cache.
 
@@ -35,7 +36,7 @@ class MRUCache(BaseCaching):
         self.cache_data[key] = item
         self.key_list.append(key)
 
-    def get(self, key):
+    def get(self, key) -> Any:
         """
         Get an item by key.
 
@@ -52,4 +53,4 @@ class MRUCache(BaseCaching):
         self.key_list.remove(key)
         self.cache_data[key] = value
         self.key_list.append(key)
-        return value
+        return self.cache_data.get(key, None)
