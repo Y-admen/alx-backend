@@ -19,7 +19,7 @@ translations = {
 def index(lang):
     greeting = translations.get(lang, translations['en'])['greeting']
     return render_template('index.html', greeting=greeting)
-	```
+```
 
 ### Inferring Locale
 #### 1: Inferring Locale from URL Parameters
@@ -43,7 +43,7 @@ def index():
     lang = get_locale()
     greeting = translations.get(lang, translations['en'])['greeting']
     return render_template('index.html', greeting=greeting)
-	```
+```
 
 #### 2: Inferring Locale from User Settings (Stored in Session)
 ```python
@@ -73,7 +73,7 @@ def index():
     lang = get_locale()
     greeting = translations.get(lang, translations['en'])['greeting']
     return render_template('index.html', greeting=greeting)
-	```
+```
 
 #### 3: Inferring Locale from Request Headers
 ```python
