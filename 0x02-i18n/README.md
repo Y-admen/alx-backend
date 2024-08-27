@@ -1,6 +1,6 @@
 # i18n
 ## Flask-Babel
-It has builtin support for date formatting with timezone support as well as a very simple and friendly interface to** gettext translations**
+It has builtin support for date formatting with timezone support as well as a very simple and friendly interface to **gettext translations**
 ex
 ```python
 from flask import Flask, render_template
