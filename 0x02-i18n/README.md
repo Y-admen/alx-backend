@@ -82,6 +82,13 @@ def get_locale():
     return request.accept_languages.best_match(['en', 'es'])
 
 ```
-
+### Translating Text in Flask Applications
+using **gettext()** method
+```python
+@app.route('/')
+def index():
+    greeting = gettext('Hello, World!')
+    return render_template('index.html', greeting=greeting)
+```
 ### localize timestamps
 ##### pytz:  library allows accurate and cross platform timezone calculations
