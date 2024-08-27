@@ -4,6 +4,8 @@ from flask import Flask, render_template
 from flask_babel import Babel
 
 app = Flask(__name__)
+babel = Babel(app)
+
 
 class Config:
     "class to set Babel's default locale and available languages"
@@ -11,16 +13,18 @@ class Config:
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
+
 app.config.from_object(Config)
-babel = Babel(app)
+
 
 @app.route("/")
 def render_temp():
     """Create a single / route and an index.html
 
     Returns:
-        templates to render 
+        templates to render
     """
-    greeting1 = "Welcome to Holberton"
-    greeting2 = "Hello world"
-    return render_template('1-index.html', greeting1=greeting1, greeting2=greeting2)
+    return render_template("1-index.html")
+
+if __name__ == "__main__":
+    app.run()
