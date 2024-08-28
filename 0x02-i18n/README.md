@@ -111,6 +111,7 @@ Use the gettext function (aliased as _) in your Jinja2 templates to mark texts f
 Create a configuration file (babel.cfg) to instruct pybabel on which files to scan for translatable texts.
 
 *[python: **.py]*
+
 *[jinja2: templates/**.html]*
 
 
@@ -133,12 +134,17 @@ Example of messages.po:
 
 
 *msgid ""*
+
 *msgstr ""*
+
 *"Content-Type: text/plain; charset=UTF-8\n"*
+
 *"Language: es\n"*
 
 *#: app.py:12*
+
 *msgid "Hello, World!"*
+
 *msgstr "¡Hola, Mundo!"*
 
 ### 8-Compiling Translations
