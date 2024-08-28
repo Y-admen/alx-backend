@@ -36,11 +36,7 @@ def get_user():
 @app.befor_request
 def before_request():
     " find a user if any, and set it as a global on g.user"
-    user = get_user()
-    if user:
-        g.user = user
-    else:
-        g.user = None
+    g.user = get_user()
 
 
 @app.route('/')

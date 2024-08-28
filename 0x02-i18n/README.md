@@ -31,6 +31,7 @@ app = Flask(__name__)
 babel = Babel(app)
 
 @babel.localeselector
+" decorator isused to define a function that determines the best match for the user’s preferred langage"
 def get_locale():
     return request.args.get('lang') or 'en'
 
