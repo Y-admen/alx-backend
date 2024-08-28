@@ -1,7 +1,10 @@
+# 7-app.py
 #!/usr/bin/env python3
-"""Get locale from request"""
+"""Get locale and timezone from request"""
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+import pytz
+import pytz.exceptions
 
 app = Flask(__name__)
 
@@ -48,10 +51,31 @@ def get_locale():
     # Locale from request header
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+@babel.timezoneselector
+def get_timezone():
+    """Determine the best match with our supported time zones"""
+    # Timezone from URL parameters
+    timezone = request.args.get('timezone')
+    if timezone:
+        try:
+            return pytz.timezone(timezone)
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+
+    # Timezone from user settings
+    if g.user and g.user['timezone']:
+        try:
+            return pytz.timezone(g.user['timezone'])
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+
+    # Default timezone
+    return pytz.timezone(app.config['BABEL_DEFAULT_TIMEZONE'])
+
 @app.route('/')
 def render_temp():
     """Create a single / route and an index.html"""
-    return render_template("4-index.html")
+    return render_template("7-index.html")
 
 if __name__ == "__main__":
     app.run()
